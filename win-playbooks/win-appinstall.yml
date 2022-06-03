@@ -1,0 +1,34 @@
+---
+- hosts: all
+  gather_facts: true
+  tasks:
+    # Install from downloaded exe
+    - name: Download & Install 7Zip
+      win_package:
+        path: 'https://7zip.dev/download/7z1900-x64.exe'
+        product_id: "7Zip"
+        arguments: /S
+        state: present
+    
+    # INstall from local path 
+    - name: Install (Microsoft Visual C++ 2005 Redistributable) From Local
+      win_package:
+        path: 'C:\installers\vcredist_x86.exe'
+        product_id: '7299052B-02A4-4627-81F2-1818DA5D550D'
+        arguments: /Q
+
+    # Chocolatey 
+    - name: Install Git
+      win_chocolatey:
+        name: git
+        state: present
+
+    - name: Install Google Chrome
+      win_chocolatey:
+        name: googlechrome
+        state: present
+
+    - name: Install BGInfo
+      win_chocolatey:
+        name: bginfo
+        state: present
